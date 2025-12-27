@@ -1,0 +1,31 @@
+{
+  "name": "cs370_studentportal_group3",
+  "version": "1.0.0",
+  "description": "Hey there! In this project, you'll see the student portal website template. this is a very basic design, you can customize it as your need. I hope this project is helpful for you.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krafty28/CS370_StudentPortal_Group3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Krafty28/CS370_StudentPortal_Group3/issues"
+  },
+  "homepage": "https://github.com/Krafty28/CS370_StudentPortal_Group3#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0",
+    "node-fetch": "^3.3.2",
+    "sqlite3": "^5.1.7"
+  }
+}

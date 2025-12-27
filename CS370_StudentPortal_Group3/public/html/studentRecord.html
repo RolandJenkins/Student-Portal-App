@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Records - CS College</title>
+    <link rel="stylesheet" href="../css/main.css">
+    
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap fa-2x"></i>
+                <h1>CS College</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="home.html" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="facultyDashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li id="facultyMenu"><a href="studentRecord.html"><i class="fas fa-users"></i> Student Records</a></li>
+                <li id="facultyMenu2"><a href="addStudent.html"><i class="fas fa-user-plus"></i> Add Student</a></li>
+                <li><a href="facultyAccountSett.html"><i class="fas fa-cog"></i> Account Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h2>Student Records</h2>
+                <div class="form-group" style="margin: 0; width: 300px;">
+                    <input type="text" id="searchStudent" class="form-control" placeholder="Search students...">
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>BlueGold ID</th>
+                            <th>Name</th>
+                            <th>GPA</th>
+                            <th>Credits</th>
+                            <th>Balance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTable">
+                        <!-- Students will be populated here right?-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Details Modal -->
+    <div id="studentDetailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Student Details</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div id="studentDetailsContent">
+                <!-- Student details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>CS 370 Computer Security - Student Information System</p>
+        </div>
+    </footer>
+
+<script src="../js/common.js"></script>
+     <script src="../js/auth.js"></script>
+   <script src="../js/faculty.js"></script>
+    <script>
+        // Check authentication and role
+        if (!isAuthenticated() || getCurrentUser().role !== 'faculty') {
+            window.location.href = 'home.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            populateStudentsTable();
+            
+            // Log activity
+            logActivity(`${getCurrentUser().username} accessed student records`);
+        });
+
+        // Event listeners
+        document.getElementById('searchStudent').addEventListener('input', filterStudents);
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            logout();
+            window.location.href = 'home.html';
+        });
+
+        // Modal functionality
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('studentDetailsModal').style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === document.getElementById('studentDetailsModal')) {
+                document.getElementById('studentDetailsModal').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

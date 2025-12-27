@@ -1,0 +1,828 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --accent: #e74c3c;
+    --light: #ecf0f1;
+    --dark: #2c3e50;
+    --success: #2ecc71;
+    --warning: #f39c12;
+    --danger: #e74c3c;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Login Page Styles */
+.login-body {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.login-header {
+    margin-bottom: 30px;
+    color: white;
+}
+
+.login-header .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.login-header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.login-header h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.login-card {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.demo-accounts {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.demo-accounts p {
+    margin: 5px 0;
+}
+
+.login-footer {
+    margin-top: 30px;
+    color: white;
+    opacity: 0.8;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover, nav a.active {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Main Content */
+.main-content {
+    display: flex;
+    min-height: calc(100vh - 140px);
+}
+
+.sidebar {
+    width: 250px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+}
+
+.sidebar h3 {
+    margin-bottom: 15px;
+    color: var(--primary);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    color: #555;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background-color: var(--secondary);
+    color: white;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Login Form */
+.user-type {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.user-type label {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.user-type input {
+    display: none;
+}
+
+.user-type input:checked + span {
+    background-color: var(--secondary);
+    color: white;
+    border-color: var(--secondary);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--secondary);
+    outline: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+
+}
+
+/* Dashboard */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--secondary);
+    text-align: center;
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--secondary);
+}
+
+/* Tables */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Forms */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.form-col {
+    flex: 1;
+}
+
+/* Alerts */
+.alert {
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.close {
+    font-size: 24px;
+    cursor: pointer;
+    color: #777;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* Session Info */
+.session-info {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.session-info h3 {
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.session-info p {
+    margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .content-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+
+
+/* ===== ANIMATED BACKGROUND STYLES ===== */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  overflow: hidden;
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  animation: float 15s infinite linear;
+}
+
+/* Particle positions and sizes */
+.particle:nth-child(1) {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  left: 10%;
+  animation-duration: 20s;
+}
+
+.particle:nth-child(2) {
+  width: 120px;
+  height: 120px;
+  top: 60%;
+  left: 80%;
+  animation-duration: 25s;
+}
+
+.particle:nth-child(3) {
+  width: 60px;
+  height: 60px;
+  top: 80%;
+  left: 20%;
+  animation-duration: 18s;
+}
+
+.particle:nth-child(4) {
+  width: 100px;
+  height: 100px;
+  top: 30%;
+  left: 70%;
+  animation-duration: 22s;
+}
+
+.particle:nth-child(5) {
+  width: 70px;
+  height: 70px;
+  top: 70%;
+  left: 40%;
+  animation-duration: 17s;
+}
+
+.particle:nth-child(6) {
+  width: 90px;
+  height: 90px;
+  top: 40%;
+  left: 30%;
+  animation-duration: 24s;
+}
+
+/* Pulsing circles */
+.pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  animation: pulse 4s infinite ease-in-out;
+}
+
+.pulse:nth-child(1) {
+  top: 10%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.pulse:nth-child(2) {
+  top: 65%;
+  left: 75%;
+  animation-delay: 1s;
+}
+
+.pulse:nth-child(3) {
+  top: 75%;
+  left: 25%;
+  animation-delay: 2s;
+}
+
+.pulse:nth-child(4) {
+  top: 25%;
+  left: 65%;
+  animation-delay: 3s;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateY(-20px) rotate(90deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(0) rotate(180deg);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translateY(20px) rotate(270deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+    opacity: 0.7;
+  }
+}
+
+/* Pulsing animation */
+@keyframes pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+
+
+
+/* ===== ACADEMIC BLUE THEME ===== */
+:root {
+    /* Primary Colors */
+    --primary-dark: #1a365d;
+    --primary-main: #2c5282;
+    --primary-light: #bee3f8;
+    
+    /* Accent Colors */
+    --accent-main: #2b6cb0;
+    --accent-light: #90cdf4;
+    
+    /* Neutral Colors */
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --background: #f7fafc;
+    --surface: #ffffff;
+    
+    /* State Colors */
+    --success: #38a169;
+    --warning: #dd6b20;
+    --error: #e53e3e;
+    --info: #3182ce;
+}
+
+/* Apply the theme */
+body {
+    background-color: var(--background);
+    color: var(--text-primary);
+}
+
+.login-body {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-main) 100%);
+}
+
+.login-card {
+    background: var(--surface);
+    border: 1px solid var(--primary-light);
+}
+
+.btn {
+    background-color: var(--accent-main);
+    color: white;
+}
+
+.btn:hover {
+    background-color: var(--primary-main);
+}
+
+.form-control:focus {
+    border-color: var(--accent-main);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.1);
+}
+
+
+/* ===== SNOW ANIMATION BACKGROUND ===== */
+.snow-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+  overflow: hidden;
+}
+
+.snowfall {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 100%);
+  animation: snowfall 20s linear infinite;
+}
+
+@keyframes snowfall {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100vh; }
+}
+
+.snow-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to top, 
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%);
+  animation: accumulate 30s ease-out forwards;
+  z-index: 1;
+}
+
+.snowflakes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Login card snow effects */
+.login-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: rgba(255, 255, 255, 0.03);
+  z-index: -1;
+  filter: blur(10px);
+}
+
+/* Snow-themed elements */
+.weather-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: #bee3f8;
+  font-size: 0.9rem;
+  backdrop-filter: blur(5px);
+}
+
+.weather-info i {
+  animation: pulse 2s infinite;
+}
+
+.snow-hint {
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(43, 108, 176, 0.1);
+  border-radius: 5px;
+  color: #2b6cb0;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.snow-status {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* Button snow effect */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(43, 108, 176, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Snowflake cursor effect */
+body.login-body {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%23fff' d='M16 3l-3 9H4l7 5-3 9 8-6 8 6-3-9 7-5h-9z'/%3E%3C/svg%3E") 16 16, auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  :root {
+    --snowflake-count: 50;
+  }
+  
+  .snow-hint {
+    font-size: 0.75rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --snowflake-count: 30;
+  }
+  
+  .weather-info {
+    font-size: 0.8rem;
+  }
+}

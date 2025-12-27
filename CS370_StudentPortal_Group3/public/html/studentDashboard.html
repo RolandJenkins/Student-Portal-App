@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - CS College</title>
+    <link rel="stylesheet" href="../css/main.css">
+   
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap fa-2x"></i>
+                <h1>CS College</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="home.html" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="studentDashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li id="studentMenu"><a href="studentInfo.html"><i class="fas fa-user"></i> My Information</a></li>
+                <li><a href="studentAccountSett.html"><i class="fas fa-cog"></i> Account Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h2>Student Dashboard</h2>
+                <div id="currentTime"></div>
+            </div>
+            
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>Total Credits</h3>
+                    <p id="totalCredits">0</p>
+                </div>
+                <div class="card">
+                    <h3>GPA</h3>
+                    <p id="gpaValue">0.00</p>
+                </div>
+                <div class="card">
+                    <h3>Account Balance</h3>
+                    <p id="accountBalance">$0.00</p>
+                </div>
+<!--                 
+                <div class="card">
+                    <h3>Last Login</h3>
+                    <p id="lastLogin">Never</p>
+                </div> -->
+            </div>
+            
+            <h3>Recent Activity</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date/Time</th>
+                            <th>Activity</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activityLog">
+                        <!-- Activity log will be populated here I believe -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>CS 370 Computer Security - Student Information System</p>
+        </div>
+    </footer>
+
+   
+    <script src="../js/common.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+  // Check authentication
+  if (!isAuthenticated()) {
+    window.location.href = 'home.html';
+  }
+
+  document.addEventListener('DOMContentLoaded', async function () {
+    const currentUser = getCurrentUser();
+
+    await updateUIForUser(currentUser);
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    // Only this student's own activity
+    await fetchMyActivity(10);
+
+    // Log activity (stored server-side)
+    logActivity(`${currentUser.username} accessed dashboard`);
+  });
+
+  async function updateUIForUser(user) {
+    try {
+      // Fetch student data from your existing API
+      const res = await fetch(`/api/student?username=${encodeURIComponent(user.username)}`);
+      const student = await res.json();
+
+      if (!res.ok) {
+        console.error('Student fetch error:', student.message || student);
+        return;
+      }
+
+      // Fill the cards
+      document.getElementById('totalCredits').textContent   = student.total_credits ?? '-';
+      document.getElementById('gpaValue').textContent       = student.gpa ?? '-';
+      document.getElementById('accountBalance').textContent = 
+        (student.account_balance != null) ? `$${Number(student.account_balance).toFixed(2)}` : '-';
+
+      // Last login (from session, since DB doesn’t provide it)
+      document.getElementById('lastLogin').textContent = user.lastLogin || 'Never';
+    } catch (e) {
+      console.error('Error loading dashboard:', e);
+    }
+  }
+
+  // Logout
+  document.getElementById('logoutBtn').addEventListener('click', function () {
+    logout();
+    window.location.href = 'home.html';
+  });
+</script>

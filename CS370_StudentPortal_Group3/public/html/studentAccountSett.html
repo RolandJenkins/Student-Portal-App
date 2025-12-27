@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - CS College</title>
+    <link rel="stylesheet" href="../css/main.css">
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap fa-2x"></i>
+                <h1>CS College</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="home.html" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="studentDashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li id="studentMenu"><a href="studentInfo.html"><i class="fas fa-user"></i> My Information</a></li>
+                <li><a href="studentAccountSett.html" class="active"><i class="fas fa-cog"></i> Account Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h2>Account Settings</h2>
+            </div>
+            
+            <div class="alert" id="accountAlert" style="display: none;"></div>
+            
+            <form id="changePasswordForm">
+                <h3>Change Password</h3>
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn">Change Password</button>
+                </div>
+            </form>
+
+            <div class="session-info">
+                <h3>Session Information</h3>
+                <p><strong>Username:</strong> <span id="sessionUsername"></span></p>
+                <p><strong>Role:</strong> <span id="sessionRole"></span></p>
+<!--                 <p><strong>Last Login:</strong> <span id="sessionLastLogin"></span></p>
+ -->            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>CS 370 Computer Security - Student Information System</p>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Check authentication
+        if (!isAuthenticated()) {
+            window.location.href = 'home.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = getCurrentUser();
+            
+            // Update session info
+            document.getElementById('sessionUsername').textContent = user.username;
+            document.getElementById('sessionRole').textContent = user.role;
+/*             document.getElementById('sessionLastLogin').textContent = user.lastLogin || 'Never';
+ */            
+
+
+            // Log activity
+            logActivity(`${user.username} accessed account settings`);
+        });
+
+        // Event listeners
+        document.getElementById('changePasswordForm').addEventListener('submit', changePassword);
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            logout();
+            window.location.href = 'home.html';
+        });
+    </script>
+</body>
+</html>

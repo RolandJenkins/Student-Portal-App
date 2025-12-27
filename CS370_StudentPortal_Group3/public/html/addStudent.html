@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student - CS College</title>
+    <link rel="stylesheet" href="../css/main.css">
+   
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap fa-2x"></i>
+                <h1>CS College</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="home.html" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="facultyDashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="studentRecord.html"><i class="fas fa-users"></i> Student Records</a></li>
+                <li><a href="addStudent.html" class="active"><i class="fas fa-user-plus"></i> Add Student</a></li>
+                <li><a href="facultyAccountSett.html"><i class="fas fa-cog"></i> Account Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h2>Add New Student</h2>
+            </div>
+            
+            <div class="alert" id="addStudentAlert" style="display: none;"></div>
+            
+<form id="addStudentForm">
+  <div class="form-row">
+    <div class="form-col">
+      <div class="form-group">
+        <label for="newStudentName">Full Name</label>
+        <input type="text" id="newStudentName" class="form-control" required>
+      </div>
+    </div>
+    <div class="form-col">
+      <div class="form-group">
+        <label for="newStudentID">BlueGold ID</label>
+        <input type="text" id="newStudentID" class="form-control" required
+               autocomplete="off" />
+        <small class="hint">Must be unique (e.g., BG1004)</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="newStudentAddress">Address</label>
+    <input type="text" id="newStudentAddress" class="form-control" required>
+  </div>
+
+  <div class="form-row">
+    <div class="form-col">
+      <div class="form-group">
+        <label for="newStudentPhone">Phone Number</label>
+        <input type="text" id="newStudentPhone" class="form-control"
+               inputmode="numeric" pattern="^\d{10}$" maxlength="10" title="Phone number must be exactly 10 digits (numbers only)"
+               required placeholder="10 digits (numbers only)">
+        <small class="hint">Must be exactly 10 digits</small>
+      </div>
+    </div>
+    <div class="form-col">
+      <div class="form-group">
+        <label for="newStudentEmail">Email</label>
+        <input type="email" id="newStudentEmail" class="form-control" required
+               pattern="^[^@\s]+@uwec\.edu$" placeholder="name@uwec.edu">
+        <small class="hint">Must end with @uwec.edu</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-col">
+      <div class="form-group">
+        <label for="newStudentUsername">Username</label>
+        <input type="text" id="newStudentUsername" class="form-control" required autocomplete="off">
+      </div>
+    </div>
+    <div class="form-col">
+      <div class="form-group">
+        <label for="newStudentPassword">Password</label>
+        <input type="password" id="newStudentPassword" class="form-control" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" style="text-align: right;">
+    <button type="submit" class="btn">Add Student</button>
+  </div>
+</form>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>CS 370 Computer Security - Student Information System</p>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/auth.js"></script>
+   <script src="../js/faculty.js"></script>
+    <script>
+        // Check authentication and role
+        if (!isAuthenticated() || getCurrentUser().role !== 'faculty') {
+            window.location.href = 'home.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Log activity
+            logActivity(`${getCurrentUser().username} accessed add student page`);
+        });
+
+        // Event listeners
+        document.getElementById('addStudentForm').addEventListener('submit', addNewStudent);
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            logout();
+            window.location.href = 'home.html';
+        });
+    </script>
+</body>
+</html>

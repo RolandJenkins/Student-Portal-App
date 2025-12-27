@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard - CS College</title>
+    <link rel="stylesheet" href="../css/main.css">
+   
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap fa-2x"></i>
+                <h1>CS College</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="home.html" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="facultyDashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li id="facultyMenu"><a href="studentRecord.html"><i class="fas fa-users"></i> Student Records</a></li>
+                <li id="facultyMenu2"><a href="addStudent.html"><i class="fas fa-user-plus"></i> Add Student</a></li>
+                <li><a href="facultyAccountSett.html"><i class="fas fa-cog"></i> Account Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h2>Faculty Dashboard</h2>
+                <div id="currentTime"></div>
+            </div>
+            
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>Total Credits</h3>
+                    <p id="totalCredits">0</p>
+                </div>
+                <div class="card">
+                    <h3>GPA</h3>
+                    <p id="gpaValue">0.00</p>
+                </div>
+                <div class="card">
+                    <h3>Account Balance</h3>
+                    <p id="accountBalance">$0.00</p>
+                </div>
+<!--                 
+                <div class="card">
+                    <h3>Last Login</h3>
+                    <p id="lastLogin">Never</p>
+                </div> -->
+            </div>
+            
+            <h3>Recent Activity</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date/Time</th>
+                            <th>Activity</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activityLog">
+                        <!-- Activity log will be populated here I believe -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>CS 370 Computer Security - Student Information System</p>
+        </div>
+    </footer>
+
+   
+<script src="../js/common.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  // Check authentication
+  if (!isAuthenticated()) {
+    window.location.href = 'home.html';
+  }
+
+  document.addEventListener('DOMContentLoaded', async function () {
+    const currentUser = getCurrentUser();
+
+    updateUIForUser(currentUser);
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    // Faculty sees all activity
+    await fetchAllActivity(25);
+
+    // Log activity to DB
+    logActivity(`${currentUser.username} accessed dashboard`);
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', function () {
+    logout();
+    window.location.href = 'home.html';
+  });
+
+  function updateUIForUser(user) {
+    // Defensive lookups: only touch elements that exist on this page
+    const studentMenu  = document.getElementById('studentMenu');   // doesn't exist on faculty page
+    const facultyMenu  = document.getElementById('facultyMenu');
+    const facultyMenu2 = document.getElementById('facultyMenu2');
+
+      // Faculty cards are not tied to a single student
+      setText('totalCredits',  '-');
+      setText('gpaValue',      '-');
+      setText('accountBalance','-');
+    
+
+    setText('lastLogin', user.lastLogin || 'Never');
+  }
+
+  function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+    document.getElementById('logoutBtn').addEventListener('click', function () {
+    logout();
+    window.location.href = 'home.html';
+  });
+</script>
+
+</body>
+</html>
